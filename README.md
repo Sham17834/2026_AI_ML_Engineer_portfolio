@@ -82,7 +82,7 @@ Unlike standard NLP systems, this model is optimized for localized linguistic pa
 
 ### Custom Slang Normalization
 
-Mapped 50+ Malaysian short-forms:
+Mapped 9,000+ Malaysian short-forms:
 
 * `jg` → `juga`
 * `tk` → `tidak`
