@@ -6,9 +6,10 @@ Two end-to-end machine learning projects solving distinct e-commerce challenges:
 
 ## Project 1: Amazon Order Delay Prediction
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" width="120"/>
 ### Objective
 
-Build a predictive engine that identifies high-risk orders (**Delayed** or  **Cancelled** ) using historical logistics data, enabling proactive supply chain management.
+Build a predictive engine that identifies high-risk orders (**Delayed** or  **Cancelled** ) using historical logistics data, enabling proactive supply chain management. By flagging at-risk shipments early, operations teams can intervene before delays impact customer satisfaction and brand trust.
 
 | Detail                | Value                                                    |
 | --------------------- | -------------------------------------------------------- |
@@ -21,9 +22,10 @@ Build a predictive engine that identifies high-risk orders (**Delayed** or  **Ca
 
 ## Project 2: Shopee Review Sentiment Analysis (Manglish)
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg" alt="Shopee" width="120"/>
 ### Objective
 
-Standard NLP libraries often fail on "Bahasa Rojak" — mixed Malay-English slang common in Malaysian e-commerce. This project features a custom pipeline specifically tuned for this linguistic landscape.
+Standard NLP libraries often fail on "Bahasa Rojak" — mixed Malay-English slang common in Malaysian e-commerce. This project features a custom pipeline specifically tuned for this linguistic landscape, bridging the gap between generic NLP tooling and the realities of Southeast Asian online discourse.
 
 ### Key Innovation: Localized Preprocessing
 
@@ -41,13 +43,13 @@ Standard NLP libraries often fail on "Bahasa Rojak" — mixed Malay-English slan
 
 **Overall Accuracy: 72%**
 
-> The model is highly effective at distinguishing polarized (Positive/Negative) feedback, which is critical for business escalation workflows.
+> The model is highly effective at distinguishing polarized (Positive/Negative) feedback, which is critical for business escalation workflows. Neutral sentiment remains the most challenging class — a known limitation in short-form, code-switched text — and is an active area for improvement.
 
 ---
 
-## API Deployment in Action
+## 🚀 API Deployment in Action
 
-The model is served via a **Uvicorn** ASGI server. Below is a live demonstration handling a Manglish review.
+The model is served via a **Uvicorn** ASGI server, making it ready for production integration with e-commerce dashboards or automated review moderation systems. Below is a live demonstration handling a Manglish review.
 
 ### 1. Request Interface
 
@@ -56,18 +58,16 @@ The API accepts a JSON payload through the interactive Swagger UI. Test phrase:
 > *"Best gila! Item received safely and the packaging is damn secure."*
 
 <p align="center">
-  <img src="api_test_1.png" width="800" alt="FastAPI Input Interface">
+  <img src="Shopee Review Sentiment Analysis\api_test_1.png" width="800" alt="FastAPI Input Interface">
 </p>
-### 2. Prediction Result
-
 The backend processes the slang-heavy text and returns a sentiment classification with a confidence score. The model correctly identifies **Positive** sentiment with **47.18%** confidence.
 
-<p align="center">
-  <img src="api_test_2.png" width="800" alt="API Response Output">
-</p>
----
+### 2. Prediction Result
 
-## Tech Stack
+<p align="center">
+  <img src="Shopee Review Sentiment Analysis\api_test_2.png" width="800" alt="API Response Output">
+</p>
+## 🛠️ Tech Stack
 
 | Category             | Tools                                   |
 | -------------------- | --------------------------------------- |
@@ -76,19 +76,3 @@ The backend processes the slang-heavy text and returns a sentiment classificatio
 | **Deployment** | FastAPI, Uvicorn, JSON API              |
 
 ---
-
-## How to Run Locally
-
-```bash
-# 1. Clone the repository
-git clone <repo-url>
-cd <repo-folder>
-
-# 2. Install dependencies
-pip install -r requirements.txt
-
-# 3. Launch the API
-uvicorn main:app --reload
-```
-
-Then navigate to `http://127.0.0.1:8000/docs` to access the interactive Swagger UI.
