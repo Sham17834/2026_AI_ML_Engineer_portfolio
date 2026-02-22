@@ -7,7 +7,7 @@ Two end-to-end machine learning projects solving distinct e-commerce challenges:
 
 ## 📦 Project 1: Amazon Order Delay Prediction
 
-<img src="https://static.vecteezy.com/system/resources/thumbnails/019/136/322/small_2x/amazon-logo-amazon-icon-free-free-vector.jpg" alt="Amazon" width="120"/>
+<p align="center"><img src="https://static.vecteezy.com/system/resources/thumbnails/019/136/322/small_2x/amazon-logo-amazon-icon-free-free-vector.jpg" alt="Amazon" width="120"/>
 
 ### Objective
 
@@ -24,7 +24,7 @@ Build a predictive engine that identifies high-risk orders (**Delayed** or **Can
 
 ## 🛍️ Project 2: Shopee Review Sentiment Analysis (Manglish)
 
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzMYJnav3IsjWhojNLRgzvctY3vxC0zFMCjA&s" alt="Shopee" width="120"/>
+<p align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzMYJnav3IsjWhojNLRgzvctY3vxC0zFMCjA&s" alt="Shopee" width="120"/>
 
 ### Objective
 
