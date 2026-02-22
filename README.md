@@ -43,7 +43,7 @@ The API accepts a JSON payload through the interactive Swagger UI. Here, we test
 
 <p align="center">
 
-<img src="api_test_1.png" width="800" alt="FastAPI Input Interface">
+<img src="Shopee Review Sentiment Analysis/api_test_1.png" width="800" alt="FastAPI Input Interface">
 
 </p>
 
