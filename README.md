@@ -1,162 +1,87 @@
 # Machine Learning & NLP Projects Portfolio
 
-This repository showcases two end-to-end machine learning projects focused on real-world e-commerce use cases:
-
-1. **Amazon Order Delay Prediction**
-2. **Shopee Review Sentiment Analysis (Manglish / Bahasa Rojak)**
-
-Both projects demonstrate practical ML engineering skills including data preprocessing, feature engineering, model training, evaluation, and API deployment.
+This repository features two end-to-end machine learning projects solving distinct e-commerce challenges: **Logistics Risk Prediction** and **Localized Sentiment Analysis.**
 
 ---
 
-# Project 1: Amazon Order Delay Prediction
+## Project 1: Amazon Order Delay Prediction
 
-## Objective
+### Objective
 
-Develop a predictive model to identify whether an Amazon order will be **Delayed** or  **Cancelled** , enabling logistics teams to proactively manage delivery risks and improve customer satisfaction.
+To build a predictive engine that identifies high-risk orders (**Delayed** or  **Cancelled** ) using historical logistics data, allowing for proactive supply chain management.
 
----
-
-## Dataset Overview
-
-* 100,000 historical Amazon order records
-* Target variable: `OrderStatus` (converted into binary classification)
-
-### Key Features
-
-* Financial: `UnitPrice`, `Discount`, `ShippingCost`, `TotalAmount`
-* Logistics: `Quantity`, `Category`, `PaymentMethod`
-* Geography: `Country`, `State`, `City`
+* **Dataset:** 100,000+ historical records.
+* **Model:** `RandomForestClassifier` (Selected for its ability to handle non-linear tabular data).
+* **Performance:**  **96.06% Accuracy** .
+* **Core Skills:** Feature Engineering, Label Encoding, Supervised Learning.
 
 ---
 
-## Technical Workflow
+## Project 2: Shopee Review Sentiment Analysis (Manglish)
 
-### Data Preprocessing
+### Objective
 
-* Removed null values and irrelevant identifiers
-* Label encoding for categorical features
-* 80/20 train-test split
+Standard NLP libraries often fail on "Bahasa Rojak" (mixed Malay-English slang). This project features a custom pipeline specifically tuned for the Malaysian e-commerce landscape.
 
-### Model Selection
+### Key Innovation: Localized Preprocessing
 
-Model used: **Random Forest Classifier**
-
-Chosen for:
-
-* Robustness to outliers
-* Strong performance on tabular e-commerce data
-* Ability to capture non-linear relationships
-
-<pre class="overflow-visible! px-0!" data-start="1569" data-end="1658"><div class="w-full my-4"><div class=""><div class="relative"><div class="h-full min-h-0 min-w-0"><div class="h-full min-h-0 min-w-0"><div class="border corner-superellipse/1.1 border-token-border-light bg-token-bg-elevated-secondary rounded-3xl"><div class="pointer-events-none absolute inset-x-4 top-12 bottom-4"><div class="pointer-events-none sticky z-40 shrink-0 z-1!"><div class="sticky bg-token-border-light"></div></div></div><div class="pointer-events-none absolute inset-x-px top-0 bottom-96"><div class="pointer-events-none sticky z-40 shrink-0 z-1!"><div class="sticky bg-token-bg-elevated-secondary"></div></div></div><div class="corner-superellipse/1.1 rounded-3xl bg-token-bg-elevated-secondary"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" dir="ltr" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼk ͼy"><div class="cm-scroller"><div class="cm-content q9tKkq_readonly"><span class="ͼt">model</span><span></span><span class="ͼn">=</span><span></span><span class="ͼt">RandomForestClassifier</span><span>(</span><span class="ͼt">random_state</span><span class="ͼn">=</span><span class="ͼq">42</span><span>)</span><br/><span class="ͼt">model</span><span class="ͼn">.</span><span>fit(</span><span class="ͼt">X_train</span><span>, </span><span class="ͼt">y_train</span><span>)</span></div></div></div></div></div></div></div></div><div class=""><div class=""></div></div></div></div></div></pre>
+* **Slang Normalization:** A dictionary-based mapper for 9,000+ short-forms (e.g., `jg` → `juga`, `sdp` → `sedap`).
+* **Vectorization:** TF-IDF with `ngram_range=(1, 2)` to capture local context and sentiment-heavy phrases.
+* **Deployment:** Integrated with **FastAPI** for real-time inference.
 
 ---
 
-## Results
+## API Deployment in Action
 
-* **Accuracy: 96.06%**
-* High precision in distinguishing successful deliveries from disruptions
+The model is served via a **Uvicorn** ASGI server. Below is a demonstration of the live API handling a "Manglish" review.
+
+### 1. The Request Interface
+
+The API accepts a JSON payload through the interactive Swagger UI. Here, we test the phrase:
+
+> *"Best gila! Item received safely and the packaging is damn secure."*
+
+<p align="center">
+
+<img src="api_test_1.png" width="800" alt="FastAPI Input Interface">
+
+</p>
+
+### 2. The Prediction Result
+
+The backend processes the slang-heavy text and returns a sentiment classification with a confidence score. As seen below, the model correctly identifies the **Positive** sentiment with a **47.18%** confidence level.
+
+<p align="center">
+
+<img src="api_test_2.png" width="800" alt="API Response Output">
+
+</p>
 
 ---
 
-## Skills Demonstrated
+## Model Performance Metrics
 
-* Feature engineering
-* Supervised learning
-* Model evaluation
-* Business-oriented ML problem framing
+| **Sentiment** | **Precision** | **Recall** | **F1-Score** |
+| ------------------- | ------------------- | ---------------- | ------------------ |
+| **Negative**  | 75%                 | 75%              | 75%                |
+| **Neutral**   | 44%                 | 54%              | 48%                |
+| **Positive**  | 86%                 | 77%              | 81%                |
 
----
-
-# Project 2: Shopee Review Sentiment Analysis (Manglish / Bahasa Rojak)
-
-## Objective
-
-Build an end-to-end NLP pipeline capable of understanding Malaysian e-commerce reviews written in  **Bahasa Rojak (mixed English-Malay slang)** .
-
-Unlike standard NLP systems, this model is optimized for localized linguistic patterns.
-
----
-
-## Key Innovation: Localized Preprocessing
-
-### Custom Slang Normalization
-
-Mapped 9,000+ Malaysian short-forms:
-
-* `jg` → `juga`
-* `tk` → `tidak`
-* `sdp` → `sedap`
-
-### Noise Reduction
-
-* Regex-based cleaning
-* Preserved contextual meaning
-* Removed non-alphabetic noise
+**Overall Accuracy: 72%** *Note: The model is highly effective at distinguishing polarized (Positive/Negative) feedback, which is critical for business escalation.*
 
 ---
 
 ## Tech Stack
 
-### Model
-
-* Logistic Regression (`class_weight='balanced'`)
-* Selected for interpretability and deployment efficiency
-
-### Vectorization
-
-* TF-IDF
-* `ngram_range=(1, 2)` for contextual phrase detection
-
-### Deployment
-
-* **FastAPI**
-* Uvicorn ASGI server
-* Model serialization using Joblib
+* **ML Core:** Python, Scikit-learn, Pandas, Joblib
+* **NLP:** TF-IDF, Regex-based Slang Normalization
+* **Deployment:** FastAPI, Uvicorn, JSON API
 
 ---
 
-## Model Performance
+### How to Run Locally
 
-* **Overall Accuracy: 72%**
-
-### Classification Report
-
-| Sentiment | Precision | Recall | F1-Score |
-| --------- | --------- | ------ | -------- |
-| Negative  | 75%       | 75%    | 75%      |
-| Neutral   | 44%       | 54%    | 48%      |
-| Positive  | 86%       | 77%    | 81%      |
-
----
-
-## API Deployment
-
-The model is production-ready and deployed via FastAPI with interactive Swagger (OpenAPI) documentation.
-
-Example API response:
-
-<pre class="overflow-visible! px-0!" data-start="3393" data-end="3462"><div class="w-full my-4"><div class=""><div class="relative"><div class="h-full min-h-0 min-w-0"><div class="h-full min-h-0 min-w-0"><div class="border corner-superellipse/1.1 border-token-border-light bg-token-bg-elevated-secondary rounded-3xl"><div class="pointer-events-none absolute inset-x-4 top-12 bottom-4"><div class="pointer-events-none sticky z-40 shrink-0 z-1!"><div class="sticky bg-token-border-light"></div></div></div><div class="pointer-events-none absolute inset-x-px top-0 bottom-96"><div class="pointer-events-none sticky z-40 shrink-0 z-1!"><div class="sticky bg-token-bg-elevated-secondary"></div></div></div><div class="corner-superellipse/1.1 rounded-3xl bg-token-bg-elevated-secondary"><div class="relative z-0 flex max-w-full"><div id="code-block-viewer" dir="ltr" class="q9tKkq_viewer cm-editor z-10 light:cm-light dark:cm-light flex h-full w-full flex-col items-stretch ͼk ͼy"><div class="cm-scroller"><div class="cm-content q9tKkq_readonly"><span>{</span><br/><span>  "sentiment": </span><span class="ͼr">"Positive"</span><span>,</span><br/><span>  "confidence_score": </span><span class="ͼq">0.87</span><br/><span>}</span></div></div></div></div></div></div></div></div><div class=""><div class=""></div></div></div></div></div></pre>
-
----
-
-# Engineering Highlights
-
-* End-to-end ML lifecycle implementation
-* Real-world e-commerce datasets
-* API deployment experience
-* Production-ready model serialization
-* Localization-aware NLP preprocessing
-
----
-
-# Technologies Used
-
-* Python
-* Pandas
-* Scikit-learn
-* TF-IDF
-* FastAPI
-* Uvicorn
-* Joblib
-* Jupyter Notebook
+1. **Clone the repo:** `git clone <repo-url>`
+2. **Install dependencies:** `pip install -r requirements.txt`
+3. **Launch API:** `uvicorn main:app --reload`
+4. **Test:** Navigate to `http://127.0.0.1:8000/docs` to use the interactive UI shown in the screenshots above.
