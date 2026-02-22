@@ -53,7 +53,7 @@ The backend processes the slang-heavy text and returns a sentiment classificatio
 
 <p align="center">
 
-<img src="api_test_2.png" width="800" alt="API Response Output">
+<img src="Shopee Review Sentiment Analysis/api_test_2.png" width="800" alt="API Response Output">
 
 </p>
 
