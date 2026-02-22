@@ -43,7 +43,9 @@ The API accepts a JSON payload through the interactive Swagger UI. Here, we test
 
 <p align="center">
 
-<img src="api_test_1.png" width="800" alt="FastAPI Input Interface">
+
+<pre><div><span><img </span><span>src="images/api_test_1.png" </span><span>width="800" </span><span>alt="FastAPI </span><span>Input </span><span>Interface"></span></div></pre>
+
 
 </p>
 
