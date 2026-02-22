@@ -1,15 +1,17 @@
+
 # Machine Learning & NLP Projects Portfolio
 
-Two end-to-end machine learning projects solving distinct e-commerce challenges: **Logistics Risk Prediction** and  **Localized Sentiment Analysis** .
+Two end-to-end machine learning projects solving distinct e-commerce challenges: **Logistics Risk Prediction** and **Localized Sentiment Analysis**.
 
 ---
 
-## Project 1: Amazon Order Delay Prediction
+## 📦 Project 1: Amazon Order Delay Prediction
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" width="120"/>
+<img src="https://static.vecteezy.com/system/resources/thumbnails/019/136/322/small_2x/amazon-logo-amazon-icon-free-free-vector.jpg" alt="Amazon" width="120"/>
+
 ### Objective
 
-Build a predictive engine that identifies high-risk orders (**Delayed** or  **Cancelled** ) using historical logistics data, enabling proactive supply chain management. By flagging at-risk shipments early, operations teams can intervene before delays impact customer satisfaction and brand trust.
+Build a predictive engine that identifies high-risk orders (**Delayed** or **Cancelled**) using historical logistics data, enabling proactive supply chain management. By flagging at-risk shipments early, operations teams can intervene before delays impact customer satisfaction and brand trust.
 
 | Detail                | Value                                                    |
 | --------------------- | -------------------------------------------------------- |
@@ -20,9 +22,10 @@ Build a predictive engine that identifies high-risk orders (**Delayed** or  **Ca
 
 ---
 
-## Project 2: Shopee Review Sentiment Analysis (Manglish)
+## 🛍️ Project 2: Shopee Review Sentiment Analysis (Manglish)
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg" alt="Shopee" width="120"/>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzMYJnav3IsjWhojNLRgzvctY3vxC0zFMCjA&s" alt="Shopee" width="120"/>
+
 ### Objective
 
 Standard NLP libraries often fail on "Bahasa Rojak" — mixed Malay-English slang common in Malaysian e-commerce. This project features a custom pipeline specifically tuned for this linguistic landscape, bridging the gap between generic NLP tooling and the realities of Southeast Asian online discourse.
@@ -60,6 +63,7 @@ The API accepts a JSON payload through the interactive Swagger UI. Test phrase:
 <p align="center">
   <img src="Shopee Review Sentiment Analysis\api_test_1.png" width="800" alt="FastAPI Input Interface">
 </p>
+
 The backend processes the slang-heavy text and returns a sentiment classification with a confidence score. The model correctly identifies **Positive** sentiment with **47.18%** confidence.
 
 ### 2. Prediction Result
@@ -67,6 +71,9 @@ The backend processes the slang-heavy text and returns a sentiment classificatio
 <p align="center">
   <img src="Shopee Review Sentiment Analysis\api_test_2.png" width="800" alt="API Response Output">
 </p>
+
+---
+
 ## 🛠️ Tech Stack
 
 | Category             | Tools                                   |
