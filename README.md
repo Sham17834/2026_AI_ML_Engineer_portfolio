@@ -1,3 +1,4 @@
+
 # Machine Learning & NLP Projects Portfolio
 
 This repository features two end-to-end machine learning projects solving distinct e-commerce challenges: **Logistics Risk Prediction** and **Localized Sentiment Analysis.**
@@ -43,9 +44,7 @@ The API accepts a JSON payload through the interactive Swagger UI. Here, we test
 
 <p align="center">
 
-
-<pre><div><span><img </span><span>src="images/api_test_1.png" </span><span>width="800" </span><span>alt="FastAPI </span><span>Input </span><span>Interface"></span></div></pre>
-
+`<img src="Shopee Review Sentiment Analysis/api_test_1.png" width="800" alt="FastAPI Input Interface">`
 
 </p>
 
@@ -55,7 +54,7 @@ The backend processes the slang-heavy text and returns a sentiment classificatio
 
 <p align="center">
 
-<img src="api_test_2.png" width="800" alt="API Response Output">
+`<img src="Shopee Review Sentiment Analysis/api_test_2.png" width="800" alt="API Response Output">`
 
 </p>
 
