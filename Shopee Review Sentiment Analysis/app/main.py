@@ -1,59 +1,64 @@
-# Import necessary libraries
+# Load necessary libraries
 import re
 import joblib
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-# Initialize FastAPI app
-app = FastAPI(title="Malay Sentiment Analysis API")
+# Initialize the web server
+app = FastAPI(
+    title="Malay Sentiment Analysis API",
+)
 
-# Load the pre-trained model and TF-IDF vectorizer
+# Load the pre-trained model and vectorizer when the server starts
 model = joblib.load('models/sentiment_model.pkl')
 tfidf = joblib.load('models/tfidf_vectorizer.pkl')
 
-# Define a mapping for common Malay slang to their formal equivalents
-SLANG_MAP = {
+# Load slang mapping 
+slang = {
     "tk": "tidak", "x": "tidak", "tak": "tidak", "xde": "tak ada",
     "tp": "tapi", "sgt": "sangat", "mcm": "macam", "jgk": "juga",
     "brg": "barang", "nk": "nak", "dh": "dah", "yg": "yang",
     "utk": "untuk", "sdp": "sedap", "giler": "gila"
 }
 
-# Function to clean and preprocess the input text
-def clean_text(text: str) -> str:
-    text = re.sub(r'[^a-zA-Z\s]', '', text.lower())
+# Text cleaning function to prepare the review for the model
+def clean_text(raw_text: str) -> str:
+    text = re.sub(r'[^a-zA-Z\s]', '', raw_text.lower())
     
     words = text.split()
-    cleaned_words = [SLANG_MAP.get(word, word) for word in words]
+    standardized_words = [slang.get(w, w) for w in words]
     
-    return " ".join(cleaned_words)
+    return " ".join(standardized_words)
 
 # Define the input data model for the API
-class Comment(BaseModel):
+class ReviewInput(BaseModel):
     text: str
 
-# Define API endpoints
+# A simple home page to check if the server is running
 @app.get("/")
 def home():
-    return {"status": "online", "description": "Malay Sentiment API"}
+    return {"message": "System is live! Use the /predict endpoint to analyze reviews"}
 
-# Endpoint to predict sentiment of a given comment
+# The main endpoint to receive reviews and return sentiment predictions
 @app.post("/predict")
-async def predict_sentiment(comment: Comment):
+async def predict_sentiment(review: ReviewInput):
+    cleaned = clean_text(review.text)
     
-    cleaned_text = clean_text(comment.text)
+    vector = tfidf.transform([cleaned])
     
-    vectorized_input = tfidf.transform([cleaned_text])
+    prediction_num = model.predict(vector)[0]
+    all_probabilities = model.predict_proba(vector)[0]
     
-    prediction = model.predict(vectorized_input)[0]
-    probabilities = model.predict_proba(vectorized_input)[0]
-
-    label_map = {0: "Negative", 1: "Neutral", 2: "Positive"}
-    result_label = label_map.get(int(prediction), "Unknown")
+    labels = {0: "Negative", 1: "Neutral", 2: "Positive"}
+    final_sentiment = labels.get(int(prediction_num), "Unknown")
     
+    # Format the response with the original review, cleaned text, predicted sentiment, and confidence score
     return {
-        "original_text": comment.text,
-        "cleaned_text": cleaned_text,
-        "sentiment": result_label,
-        "confidence": f"{max(probabilities):.2%}"
+        "status": "success",
+        "data": {
+            "input": review.text,
+            "cleaned text": cleaned,
+            "prediction": final_sentiment,
+            "confidence_score": f"{max(all_probabilities):.2%}"
+        }
     }
