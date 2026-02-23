@@ -26,7 +26,13 @@ def clean_text(raw_text: str) -> str:
     text = re.sub(r'[^a-zA-Z\s]', '', raw_text.lower())
     
     words = text.split()
-    standardized_words = [slang.get(w, w) for w in words]
+
+    standardized_words = []
+    for w in words:
+        if w in slang:
+            standardized_words.append(slang[w])
+        else:
+            standardized_words.append(w)
     
     return " ".join(standardized_words)
 
